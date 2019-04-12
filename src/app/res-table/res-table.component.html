@@ -1,0 +1,75 @@
+<div class="container table-responsive">
+	<div class="row alert alert-warning" role="alert" *ngIf="itemList.length == 0">
+  		No record.
+	</div>
+	<div class="buttonrow" *ngIf="itemList.length !=0">
+		<button class="btn btn-outline-secondary float-right" (click)="showDetails()" [disabled]="!hasItem">
+		Details
+		<i class="material-icons md-18">arrow_forward_ios</i>
+	</button>
+	</div>
+	<table class="table table-striped table-dark" *ngIf="itemList.length !=0" id="restable"> 
+		<thead>
+			<th scope="col" style="min-width: 10px;">#</th>
+			<th scope="col" style="min-width: 120px;">Image</th>
+			<th scope="col" style="min-width: 250px;">Title</th>
+			<th scope="col" style="min-width: 100px;">Price</th>
+			<th scope="col" style="min-width: 100px;">Shipping</th>
+			<th scope="col" style="min-width: 60px;">zip</th>
+			<th scope="col" style="min-width: 100px;">Seller</th>
+			<th scope="col" style="min-width: 50px;">Wish List</th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of currPageList" [ngStyle]="{'background-color': item.ebayId==isChosen ? '#b4b4b4' : 'transparent'}">
+				<th scope="row">{{item.id}}</th>
+				<td>
+					<a [href]="item.imageURL"  target="_blank">
+						<img [src]="item.imageURL" alt="N/A">	
+					</a>
+				</td>
+				<td>
+					<a href="javascript:void(0);"  (click)="searchItemDetail(item)" 
+					matTooltip="{{item.title}}" matTooltipClass="tooltip-center">
+					{{item.title | limitLength}}</a>	
+				</td>
+				<td>${{item.price}}</td>
+				<td>{{item.shippingCost}}</td>
+				<td>{{item.zip}}</td>
+				<td>{{item.seller}}</td>
+				<td>
+					<button class="btn btn-light" [hidden]="wishList.has(item.ebayId)" (click)="addToWishList(item)">
+						<i class="material-icons md-18">add_shopping_cart</i>
+					</button>
+					<button class="btn btn-light" [hidden]="!wishList.has(item.ebayId)" (click)="deleteFromWishList(item)">
+						<i class="material-icons md-18" style="color: #FFD700;">remove_shopping_cart</i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>	
+	<div class="btn-toolbar " role="toolbar" aria-label="Toolbar with button groups" *ngIf="itemList.length !=0">
+		<div class="btn-group mr-2 mx-auto" role="group" aria-label="Second group">
+		    <button type="button" class="btn btn-light" 
+		    [disabled]="currPage === 0" 
+		    (click)="setPage(currPage - 1)">
+		    «Previous
+		    </button>
+
+		    <button type="button" class="btn btn-light"
+			*ngFor="let page of pager"
+			[ngClass]="{active:currPage === page}"
+			[ngStyle]="{'background-color' : currPage === page ? '#000000' : '#FFFFFF' ,
+						'color' : currPage === page ? '#FFFFFF' : '#000000'}"
+			(click)="setPage(page)">
+			{{page+1}}
+			</button>
+
+		    <button type="button" class="btn btn-light"
+			[disabled]="currPage === pager.length-1" 
+			(click)="setPage(currPage + 1)">
+			Next»
+			</button>
+		</div>
+	</div>
+</div>
+

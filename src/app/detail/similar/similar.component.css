@@ -1,0 +1,31 @@
+.innerwrapper{
+	float: right;
+	display: flex;
+	width: 100px;
+	height: 100px;
+	text-align:center;
+}
+.innerwrapper img{
+	width: 100px;
+	height: 100px;
+}
+
+.img-flex-box{
+	display: inline-block;
+    width: 100px;
+    margin-left: 10px;
+    margin-top: 10px;
+    vertical-align: inherit;
+    justify-content: center;
+}
+
+a{
+	color: #647e7f;
+}
+
+.text-wrapper{
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 10px;
+	margin-left: 10px;
+}

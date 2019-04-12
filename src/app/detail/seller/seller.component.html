@@ -1,0 +1,64 @@
+<table class="table table-striped table-dark">
+	
+	<thead *ngIf="item.seller != '' " class="text-center">
+		<th colspan="2">{{item.seller}}</th>
+	</thead>
+	<tbody>
+		<tr *ngIf="detail.feedbackScore>=0">
+			<th scope="row">
+				Feedback Score
+			</th>
+			<td>{{detail.feedbackScore}}</td>
+		</tr>
+		<tr *ngIf="detail.PositiveFeedbackPercent>=0">
+			<th scope="row" class="popularity">
+				Popularity
+			</th>
+			<td>
+				<div class="progress-wrapper">
+					<div class="current"><span>{{detail.PositiveFeedbackPercent}}</span></div>
+					<round-progress [current]="detail.PositiveFeedbackPercent" 
+					[max]="max" [color]="color" [radius]="radius" [stroke]="stroke"></round-progress>	
+				</div>
+			</td>
+		</tr>
+		<tr *ngIf="detail.feedbackScore>=0">
+			<th scope="row">
+				Feedback Rating Star
+			</th>
+			<td>
+				<i class="material-icons md-24" 
+				[hidden]="detail.feedbackScore<10000" 
+				[ngStyle] = "{'color':getStarColor(detail.feedbackScore)}">stars</i>
+				<i class="material-icons md-24" 
+				[hidden]="detail.feedbackScore>=10000||detail.feedbackScore<10" 
+				[ngStyle] = "{'color':getStarColor(detail.feedbackScore)}">star_border</i>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row">
+				Top Rated
+			</th>
+			<td>
+				<i class="material-icons md-24" style="color: #228B22;" 
+				[hidden]="!detail.TopRatedSeller">check</i>
+				<i class="material-icons md-24" style="color: #B22222;" 
+				[hidden]="detail.TopRatedSeller">close</i>
+			</td>
+		</tr>
+		<tr *ngIf="detail.StoreName != '' ">
+			<th scope="row">
+				Store Name
+			</th>
+			<td>{{detail.StoreName}}</td>
+		</tr>
+		<tr *ngIf="detail.StoreURL != '' ">
+			<th scope="row">
+				Buy Product At
+			</th>
+			<td>
+				<a href="" (click)="goStore(detail.StoreURL)" target="_blank">Store</a>
+			</td>
+		</tr>
+	</tbody>
+</table>

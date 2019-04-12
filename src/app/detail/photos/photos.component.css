@@ -1,0 +1,9 @@
+.img-wrapper{
+	border: 5px solid #000000;
+	margin: 2px;
+}
+.img-wrapper img{
+	width: 100%;
+	max-width: 100%;
+	height: auto;
+}

@@ -1,0 +1,17 @@
+#facebook{
+	width: 24px;
+	height: 24px;
+	background-image: url(http://csci571.com/hw/hw8/Images/facebook.png);
+	margin: 0px;
+	padding: 0px;
+}
+
+.nav-link .nav-link-mobile{
+	padding: .3rem .6rem;
+}
+
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }

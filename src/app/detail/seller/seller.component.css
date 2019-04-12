@@ -1,0 +1,27 @@
+.progress-wrapper{
+	width: 29px;
+}
+.current {
+  position: relative;
+	z-index: 1 ;
+	top:5.5px;
+	
+	height: 0px;
+	width: 29px;
+	text-align: center;
+}
+.popularity{
+	vertical-align: baseline;
+}
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+th,td{
+	width: 50%;
+}
+
+a{
+	color: #5f9ea0;
+}

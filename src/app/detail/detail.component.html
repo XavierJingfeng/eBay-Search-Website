@@ -1,0 +1,92 @@
+
+<div class="container" *ngIf="item.id<0 && Loading">
+	<div class="row">
+			
+	</div>
+	<div class="row alert alert-warning" role="alert" >
+  		No record.
+	</div>
+</div>
+<div class="container" *ngIf="item.id>=0">
+	<div class="row" *ngIf="item.title!=''">
+		<p class="mx-auto h2 font-weight-bold text-center">{{item.title}}</p>
+	</div>
+<div class="row">
+	<!-- <div class="col-md-6">
+		<button class="btn btn-outline-secondary" (click)="slideDetail()">
+			<i class="material-icons md-18">arrow_back_ios</i>List
+		</button>		
+	</div> -->
+	<div class="col-md-12">
+		<button class="btn btn-outline-secondary float-left" (click)="slideDetail()">
+			<i class="material-icons md-18">arrow_back_ios</i>List
+		</button>	
+	
+		<button class="btn btn-light float-right " [hidden]="isWished" (click)="addToWishList()">
+			<i class="material-icons md-18">add_shopping_cart</i>
+		</button>
+		<button class="btn btn-light float-right" [hidden]="!isWished" (click)="deleteFromWishList()">
+			<i class="material-icons md-18" style="color: #FFD700;">remove_shopping_cart</i>
+		</button>
+		<button class="btn btn-light float-right px-0 py-0" (click)="facebook()" >
+			<img src="http://csci571.com/hw/hw8/Images/facebook.png" alt="facebook" id="facebook">
+		</button>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+	<ul class="nav nav-tabs justify-content-end" id="nav">
+  <li class="nav-item">
+    <a class="nav-link" 
+	(click)="setCurrTag('product')"
+	[ngStyle]="{'background-color' : currTag === 'product' ? '#000000' : 'transparent' ,
+						'color' : currTag === 'product' ? '#FFFFFF' : '#000000',
+						'padding' : !isMobile ? '.5rem 1rem' : '.3rem .6rem'}"
+    href="#nav">Product</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" 
+	(click)="setCurrTag('photos')"
+	[ngStyle]="{'background-color' : currTag === 'photos' ? '#000000' : 'transparent' ,
+						'color' : currTag === 'photos' ? '#FFFFFF' : '#000000',
+						'padding' : !isMobile ? '.5rem 1rem' : '.3rem .6rem'}"
+    href="#nav">Photos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" 
+	(click)="setCurrTag('shipping')"
+	
+	[ngStyle]="{'background-color' : currTag === 'shipping' ? '#000000' : 'transparent' ,
+						'color' : currTag === 'shipping' ? '#FFFFFF' : '#000000',
+						'padding' : !isMobile ? '.5rem 1rem' : '.3rem .6rem'}"
+    href="#nav">Shipping</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" 
+	(click)="setCurrTag('seller')"
+	[ngStyle]="{'background-color' : currTag === 'seller' ? '#000000' : 'transparent' ,
+						'color' : currTag === 'seller' ? '#FFFFFF' : '#000000',
+						'padding' : !isMobile ? '.5rem 1rem' : '.3rem .6rem'}"
+    href="#nav">Seller</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" 
+	(click)="setCurrTag('similar')"
+	[ngStyle]="{'background-color' : currTag === 'similar' ? '#000000' : 'transparent' ,
+						'color' : currTag === 'similar' ? '#FFFFFF' : '#000000',
+						'padding' : !isMobile ? '.5rem 1rem' : '.3rem .6rem'}"
+    href="#nav"	>{{similarTag}}</a>
+  </li>
+</ul>
+</div>
+	
+
+</div>
+
+<app-product [hidden]="currTag != 'product'" [item] = "item" [detail] = "detail" [ItemSpecifics] = "ItemSpecifics"></app-product>
+<app-photos *ngIf="currTag === 'photos'" [photos] = "photos"></app-photos>
+<app-seller *ngIf="currTag === 'seller'" [item] = "item" [detail] = "detail"></app-seller>
+<app-shipping *ngIf="currTag === 'shipping'" [item] = "item" [detail] = "detail"></app-shipping>
+<app-similar *ngIf="currTag === 'similar'" ></app-similar>
+	
+</div>

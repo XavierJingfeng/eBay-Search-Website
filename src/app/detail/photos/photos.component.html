@@ -1,0 +1,25 @@
+<div class="">
+	<div class="photos-container" *ngIf="photos.length" class="row">
+		<div class="col-sm-4 px-0">
+				<div class="img-wrapper" *ngFor="let photo of photos.slice(6, 9)">
+					<a [href]="photo.link" target="_blank">
+			  			<img [src]="photo.link" alt="">
+					</a>
+				</div>
+    	</div>
+    	<div class="col-sm-4 px-0">
+			<div class="img-wrapper" *ngFor="let photo of photos.slice(3, 6)">
+				<a [href]="photo.link" target="_blank">
+		  			<img [src]="photo.link" alt="">
+				</a>
+			</div>
+    	</div>
+    	<div class="col-sm-4 px-0">
+			<div class="img-wrapper" *ngFor="let photo of photos.slice(0, 3)">
+				<a [href]="photo.link" target="_blank">
+		  			<img [src]="photo.link" alt="">
+				</a>
+			</div>
+    	</div>
+	</div>
+</div>

@@ -1,0 +1,128 @@
+
+
+<div class="container-fluid text-light mx-auto w-100" style="background-color:#000000;" *ngIf="!showProgressbar">
+	<div class="row">
+		<p class="text-light mx-auto my-4 header">Product Search</p>	
+	</div>
+	<div class="container mx-auto w-75">
+		<form #userForm="ngForm" (ngSubmit)="onSubmit()">
+			
+			<div class="form-group required row">
+				<div class="align-self-start col-sm-3 col-form-label">
+					<label for="keyword">Keyword</label><span style="vertical-align: top;color: #FF0000;">*</span>	
+				</div>
+				<div class="col-sm-9">
+					<input type="text" id="keyword" name="keyword" [ngClass]="{'form-control': true, 'is-invalid': isEmptyKeyword() && (keywordControl.dirty || keywordControl.touched)}" required 
+					placeholder="Enter Product Name (eg. iPhone 8)" 
+					[formControl]="keywordControl">
+					<div class="invalid-feedback">
+          				Please enter a keyword
+        			</div>
+				</div>
+				</div>
+				
+
+			<div class="form-group row">
+				<div class="align-self-start col-sm-3 col-form-label">
+					<label for="category">Category</label>
+				</div>
+				<div class="col-sm-4">
+					<select class="form-control custom-select mr-sm-2" name="category" id="category" [(ngModel)]="SearchItem.category">
+						
+						<option *ngFor="let category of category_types" 
+								[value] = "category.value">{{category.name}}</option>
+					</select>
+				</div>
+			</div>
+
+		    <div class="form-group row">
+		    	<div class="col-form-label col-sm-3 pt-0">
+		    		<label for="condition">Condition</label>
+		    	</div>
+		        <div class="col-sm-9" >
+		        	<div class="form-check form-check-inline" id="condition">
+						<input class="form-check-input" type="checkbox" name="condition1" id="condition1" value="New" 
+						[(ngModel)]="SearchItem.condition1">
+						<label class="form-check-label" for="condition1">New</label>
+					</div>
+					<div class="form-check form-check-inline">
+					  	<input class="form-check-input" type="checkbox" name="condition2" id="condition2" value="Used" [(ngModel)]="SearchItem.condition2">
+					  	<label class="form-check-label" for="condition2">Used</label>
+					</div>
+					<div class="form-check form-check-inline">
+					  	<input class="form-check-input" type="checkbox" name="condition3" id="condition3" value="Unspecified" [(ngModel)]="SearchItem.condition3">
+					  	<label class="form-check-label" for="condition3">Unspecified</label>
+					</div>	
+		    	</div>
+		    </div>
+
+			<div class="form-group row">
+				<div class="col-form-label col-sm-3 pt-0">
+					<label>Shipping Options</label>
+				</div>
+				<div class="col-sm-9" >
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="shipping1" id="Shippping1" value="Local_Pickup" [(ngModel)]="SearchItem.shipping1">
+						<label class="form-check-label" for="shipping1">Local Pickup</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" name="shipping2" id="Shippping2" value="Free_Shipping" [(ngModel)]="SearchItem.shipping2">
+						<label class="form-check-label" for="shipping2">Free Shipping</label>
+					</div>				
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<div class="col-form-label col-sm-3 pt-0">
+					<label  for="distance">Distance (Miles)</label>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" name="distance" id="distance" class="form-control" placeholder="10"
+					[(ngModel)]="SearchItem.distance">	
+				</div>
+			</div>
+
+			<div class="form-group required row">
+				<div class="col-form-label col-sm-3 pt-0">
+					<label for="distance">From</label><span style="vertical-align: top;color: #FF0000;">*</span>
+				</div>
+				<div class="col-sm-9">
+					<div class="form-check">
+						<input class="form-check-input"  [(ngModel)]="SearchItem.distance_option" type="radio" 
+						name="distance_option" id="Current_Location" value="1" (click)="resetzip()">
+						<label class="form-check-label" for="Current_Location">Current Location</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" [(ngModel)]="SearchItem.distance_option" type="radio" 
+						name="distance_option" id="Other" value="2" (click)="enableZip()">
+						<label class="form-check-label" for="Other">Other. Please specify zip code:</label>
+					</div>
+
+						<input type="text" name="zip_code" id="zip_code" 
+						[ngClass]="{'form-control': true, 'is-invalid':  this.SearchItem.distance_option === '2'&&isEmptyZip()&&(this.zipControl.dirty || this.zipControl.touched)}" 
+						[formControl]="zipControl" [matAutocomplete]="auto">
+						<mat-autocomplete #auto="matAutocomplete">
+							<mat-option *ngFor="let zip of zipcodeList | async" [value]="zip">
+								{{zip}}
+							</mat-option>
+					  	</mat-autocomplete>
+				
+					<div class="invalid-feedback">
+          				Please enter a zip code
+        			</div>
+							
+				</div>
+			</div>	
+			<div class="row my-2 mx-0">
+				<button type="submit" class="btn btn-light px-3 btn-lg" (click)="onSubmit()"
+				[disabled]="!validForm()">
+					<i class="material-icons md-24">search</i>Search</button>
+				<button type="button" class="btn btn-light ml-5 px-3 btn-lg" (click)=" newSearch(); " >
+					<i class="material-icons md-24">clear_all</i>Clear</button>	
+				</div>
+			
+		</form>
+	</div>
+</div>
+
+ <!-- for result container -->
