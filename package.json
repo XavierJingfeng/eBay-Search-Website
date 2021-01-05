@@ -25,7 +25,7 @@
     "angular-popper": "^2.0.1",
     "angular-svg-round-progressbar": "^2.0.0",
     "angular-webstorage-service": "^1.0.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
